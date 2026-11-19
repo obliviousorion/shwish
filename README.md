@@ -40,3 +40,4 @@ behavior and portability goals explicit as these features are introduced.
 - [POSIX Shell Command Language](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html)
 - [dash source repository](https://git.kernel.org/pub/scm/utils/dash/dash.git/)
 - [BusyBox ash source](https://git.busybox.net/busybox/tree/shell/ash.c)
+- [Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)
