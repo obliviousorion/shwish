@@ -1,9 +1,15 @@
 # shwish
 
-`shwish` is a small shell written in C. The project is at its starting point:
-it currently reads lines, tokenizes with POSIX quoting, runs external commands
-and the builtins `cd`, `pwd`, `export`, `exit`. Redirection, pipelines,
-`;`/`&&`/`||`, job control and `$VAR` expansion are not implemented yet.
+`shwish` is a small POSIX-ish shell written in C. The project has completed its first
+four milestones:
+
+- interactive REPL with a tty-only prompt and clean EOF handling
+- whitespace tokenization with single quotes, double quotes, and backslash escapes
+- external command execution via `fork`/`execvp`/`waitpid`, including exit status handling
+- the in-process builtins `cd`, `pwd`, `export`, and `exit`
+
+Redirection, pipelines, `;`/`&&`/`||`, grouping, job control, and `$VAR` expansion
+are not implemented yet.
 
 ## Requirements
 
@@ -18,23 +24,35 @@ make
 ./shwish
 ```
 
-Run `make test` for the tokenizer unit tests (ASan/UBSan) and the diff against a
-reference shell (`dash` if installed, else `sh`). Run `make clean` to remove generated files.
 The prompt is printed only on a terminal; Ctrl-D exits.
+
+## Test
+
+```sh
+make test
+```
+
+This builds and runs the tokenizer unit tests with AddressSanitizer and UndefinedBehaviorSanitizer,
+then compares a set of shell scripts against `dash` (or `sh` as a fallback).
+
+Use `make clean` to remove generated files.
 
 ## Project layout
 
 ```text
-src/       C implementation (main.c REPL, tokenize.c, exec.c)
-include/   shared header
-tests/     tokenizer unit tests + diff-against-reference script
+src/       C implementation (REPL, tokenizer, command execution)
+include/   shared declarations
+ tests/     tokenizer unit tests and dash comparison script
+ docs/      roadmap, design notes, and learning log
 ```
 
-## Development direction
+## Current milestone
 
-Useful milestones for growing the shell are tokenization, parsing, built-ins,
-process execution, pipelines, redirection, and job control. Keep POSIX shell
-behavior and portability goals explicit as these features are introduced.
+M5 Redirection: implement `<`, `>`, `>>`, `2>`, and `2>&1` using `open`/`dup2`.
+
+The development direction is tokenization, parsing, built-ins, process execution,
+redirection, pipelines, and job control. Keep POSIX shell behavior and portability
+explicit as features are introduced.
 
 ## References
 
