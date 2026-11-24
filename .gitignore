@@ -2,3 +2,10 @@
 /src/*.o
 /core
 /core.*
+/.agent/
+/.github/
+/docs/
+/AGENTS.md
+/agents.md
+/.gitignore
+/tests/test_tokenize
