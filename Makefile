@@ -19,3 +19,7 @@ src/%.o: src/%.c
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+test: $(TARGET)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fsanitize=address,undefined -o tests/test_tokenize tests/test_tokenize.c src/tokenize.c
+	./tests/test_tokenize
+	sh tests/compare.sh
