@@ -1,8 +1,9 @@
 # shwish
 
 `shwish` is a small shell written in C. The project is at its starting point:
-it currently builds an interactive input loop, while parsing and command
-execution remain to be implemented.
+it currently reads lines, tokenizes with POSIX quoting, runs external commands
+and the builtins `cd`, `pwd`, `export`, `exit`. Redirection, pipelines,
+`;`/`&&`/`||`, job control and `$VAR` expansion are not implemented yet.
 
 ## Requirements
 
@@ -17,17 +18,17 @@ make
 ./shwish
 ```
 
-Run `make clean` to remove generated files. The starter prints a prompt when
-connected to a terminal and reads input until end-of-file. It does not execute
-commands yet.
+Run `make test` for the tokenizer unit tests (ASan/UBSan) and the diff against a
+reference shell (`dash` if installed, else `sh`). Run `make clean` to remove generated files.
+The prompt is printed only on a terminal; Ctrl-D exits.
 
 ## Project layout
 
 ```text
-src/       C implementation
+src/       C implementation (main.c REPL, tokenize.c, exec.c)
+include/   shared header
+tests/     tokenizer unit tests + diff-against-reference script
 ```
-
-Add `include/` for shared headers and `tests/` as the implementation grows.
 
 ## Development direction
 
