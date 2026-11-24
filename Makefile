@@ -4,10 +4,10 @@ CPPFLAGS ?= -Iinclude
 LDFLAGS ?=
 
 TARGET := shwish
-SOURCES := src/main.c
+SOURCES := src/main.c src/tokenize.c src/exec.c
 OBJECTS := $(SOURCES:.c=.o)
 
-.PHONY: all clean
+.PHONY: all clean test
 
 all: $(TARGET)
 
